@@ -1,7 +1,7 @@
 @extends('includes.auth.app')
 
 @section('title')
-    Forgot password
+    Reset password
 @endsection
 
 @section('content')
@@ -26,20 +26,25 @@
 
                                     <div class="pt-4 pb-2">
                                         <h5 class="card-title text-center pb-0 fs-4">Reset Password</h5>
-                                        <p class="text-center small">Enter your email to forgot password</p>
                                     </div>
 
                                     @include('includes.home.message')
                                     <form class="row g-3 needs-validation" action="" method="post">
                                         @csrf
                                         <div class="col-12">
-                                            <label for="email" class="form-label">Your Email</label>
-                                            <input type="email" name="email" class="form-control" id="email" required>
+                                            <label for="password" class="form-label">Password</label>
+                                            <input type="password" name="password" class="form-control" id="password" required>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <label for="confirm_password" class="form-label">Confirm Password</label>
+                                            <input type="password" name="cpassword" class="form-control" id="cpassword" required>
                                         </div>
 
                                         <div class="col-12">
                                             <button class="btn btn-primary w-100" type="submit">Reset password</button>
                                         </div>
+                                        
                                         <div class="col-12">
                                             <p class="small mb-0">Don't have an account? <a href="{{ route('auth.register') }}">Register a new account</a></p>
                                             <p class="small mb-0"><a href="{{ route('auth.login') }}">Login</a></p>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ForgotPasswordMail;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -25,6 +26,38 @@ class AuthController extends Controller
     public function forgot_password()
     {
         return view('auth.forgot_password');
+    }
+
+    public function post_reset($token, Request $request)
+    {
+        $user = User::where('remember_token', '=', $token)->first();
+        if (!empty($user)) {
+            if ($request->password == $request->cpassword) {
+                $user->password = Hash::make($request->password);
+                if (empty($user->email_verified_at)) {
+                    $user->email_verified_at = date('Y-m-d H:i:s');
+                }
+                $user->remember_token = Str::random(40);
+                $user->save();
+                
+                return redirect('login')->with('success', "Password reset successfully!");
+            } else {
+                return redirect()->back()->with('error', 'Password and Confirm Password does\'nt match!');
+            }
+        } else {
+            abort(404);
+        }
+    }
+
+    public function reset($token)
+    {
+        $user = User::where('remember_token', '=', $token)->first();
+        if (!empty($user)) {
+            $data['user'] = $user;
+            return view('auth.reset', $data);
+        } else {
+            abort(404);
+        }
     }
 
     public function create_user(Request $request)
@@ -69,7 +102,7 @@ class AuthController extends Controller
                 echo "successfully!";
                 die;
             } else {
-                $user_id=Auth::user()->id;
+                $user_id = Auth::user()->id;
                 Auth::logout();
 
                 $save = User::getSingle($user_id);
@@ -81,6 +114,19 @@ class AuthController extends Controller
             }
         } else {
             return redirect()->back()->with('error', 'Please enter correct email and password !');
+        }
+    }
+
+    public function forgot_password_reset(Request $request)
+    {
+        $user = User::where('email', '=', $request->email)->first();
+        if (!empty($user)) {
+            $user->remember_token = Str::random(40);
+            $user->save();
+            Mail::to($user->email)->send(new ForgotPasswordMail($user));
+            return redirect()->back()->with('success', 'Password reset link has been sent to your email!');
+        } else {
+            return redirect()->back()->with('error', 'Email not found in the system!');
         }
     }
 }
