@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +18,6 @@ Route::post('reset/{token}', [AuthController::class, 'post_reset'])->name('auth.
 
 // Home
 Route::get('/', [HomeController::class, 'home'])->name('home.home');
+
+// Dashboard
+Route::get('panel/dashboard', [DashboardController::class, 'dashboard'])->name('backend.dashboard');

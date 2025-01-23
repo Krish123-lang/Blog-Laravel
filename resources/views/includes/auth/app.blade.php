@@ -31,13 +31,26 @@
 </head>
 
 <body>
-    {{-- @include('includes.header') --}}
+    {{-- @include('includes.auth.header')
+    @include('includes.auth.sidebar') --}}
 
-    @yield('content')
+    @php
+        $authRoutes = ['auth.login', 'auth.register', 'auth.forgot_password', 'auth.reset'];
+    @endphp
 
-    {{-- @include('includes.sidebar') --}}
+    @if (!in_array(Route::currentRouteName(), $authRoutes))
+        @include('includes.auth.header')
+        @include('includes.auth.sidebar')
+    @endif
 
-    {{-- @include('includes.footer') --}}
+    <main id="main" class="main">
+      @yield('content')
+    </main>
+
+    {{-- @include('includes.auth.footer') --}}
+    @if (!in_array(Route::currentRouteName(), $authRoutes))
+        @include('includes.auth.footer')
+    @endif
 </body>
 
 </html>
