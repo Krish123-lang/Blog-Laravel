@@ -39,7 +39,7 @@ class AuthController extends Controller
                 }
                 $user->remember_token = Str::random(40);
                 $user->save();
-                
+
                 return redirect('login')->with('success', "Password reset successfully!");
             } else {
                 return redirect()->back()->with('error', 'Password and Confirm Password does\'nt match!');
@@ -99,8 +99,7 @@ class AuthController extends Controller
         $remember = !empty($request->remember) ? true : false;
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password], $remember)) {
             if (!empty(Auth::user()->email_verified_at)) {
-                echo "successfully!";
-                die;
+                return to_route('backend.dashboard');
             } else {
                 $user_id = Auth::user()->id;
                 Auth::logout();
@@ -128,5 +127,11 @@ class AuthController extends Controller
         } else {
             return redirect()->back()->with('error', 'Email not found in the system!');
         }
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return to_route('auth.login');
     }
 }

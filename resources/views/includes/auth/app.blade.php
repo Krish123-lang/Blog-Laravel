@@ -43,9 +43,9 @@
         @include('includes.auth.sidebar')
     @endif
 
-    <main id="main" class="main">
+    {{-- <main id="main" class="main"> --}}
       @yield('content')
-    </main>
+    {{-- </main> --}}
 
     {{-- @include('includes.auth.footer') --}}
     @if (!in_array(Route::currentRouteName(), $authRoutes))
