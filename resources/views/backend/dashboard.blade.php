@@ -21,7 +21,7 @@
       <div class="col-lg-8">
         <div class="row">
 
-          <!-- Sales Card -->
+          <!-- Sales Card --> 
           <div class="col-xxl-4 col-md-6">
             <div class="card info-card sales-card">
 

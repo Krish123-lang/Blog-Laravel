@@ -43,9 +43,27 @@
         @include('includes.auth.sidebar')
     @endif
 
-    {{-- <main id="main" class="main"> --}}
+    @php
+        // Define routes where the main tag should not be applied
+        $excludedRoutes = [
+            'auth.login',
+            'auth.register',
+            'auth.forgot_password',
+            'auth.reset'
+        ];
+    @endphp
+
+    {{-- <main id="main" class="main">
       @yield('content')
-    {{-- </main> --}}
+    </main> --}}
+
+    @if (!in_array(Route::currentRouteName(), $excludedRoutes))
+        <main id="main" class="main">
+            @yield('content')
+        </main>
+    @else
+        @yield('content')
+    @endif
 
     {{-- @include('includes.auth.footer') --}}
     @if (!in_array(Route::currentRouteName(), $authRoutes))
