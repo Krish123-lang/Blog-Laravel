@@ -11,8 +11,7 @@
       </li><!-- End Dashboard Nav -->
 
       <li class="nav-item">
-        {{-- {{ route('backend.user.list') }} --}}
-        <a class="nav-link collapsed" href="">
+        <a class="nav-link collapsed" href="{{ route('backend.user.list') }}">
           <i class="bi bi-person"></i>
           <span>Users</span>
         </a>

@@ -26,4 +26,9 @@ Route::group(['middleware' => AuthMiddleware::class], function () {
     // Dashboard
     Route::get('panel/dashboard', [DashboardController::class, 'dashboard'])->name('backend.dashboard');
     Route::get('panel/user/list', [UserController::class, 'user_list'])->name('backend.user.list');
+    Route::get('panel/user/add', [UserController::class, 'user_add'])->name('backend.user.add');
+    Route::post('panel/user/add', [UserController::class, 'user_store'])->name('backend.user.store');
+    Route::get('panel/user/edit/{id}', [UserController::class, 'user_edit'])->name('backend.user.edit');
+    Route::put('panel/user/edit/{id}', [UserController::class, 'user_update'])->name('backend.user.update');
+    Route::delete('panel/user/delete/{id}', [UserController::class, 'user_delete'])->name('backend.user.delete');
 });
