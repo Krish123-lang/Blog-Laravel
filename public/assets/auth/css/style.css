@@ -11,6 +11,17 @@ body {
   color: #444444;
 }
 
+html, body {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  flex: 1;
+}
+
 a {
   color: #4154f1;
   text-decoration: none;
