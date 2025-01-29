@@ -18,8 +18,7 @@
       </li><!-- End Profile Page Nav -->
 
       <li class="nav-item">
-        {{-- {{ route('backend.category.list') }} --}}
-        <a class="nav-link  @if(Request::segment(2) != 'category') collapsed @endif" href="">
+        <a class="nav-link  @if(Request::segment(2) != 'category') collapsed @endif" href="{{ route('backend.category.list') }}">
           <i class="bi bi-person"></i>
           <span>Category</span>
         </a>

@@ -56,7 +56,7 @@ class User extends Authenticatable
         return self::select('users.*')
             ->where('is_admin', '=', 0)
             ->where('is_delete', '=', 0)
-            ->orderBy('users.id', 'desc')
+            ->orderBy('users.id', 'asc')
             ->paginate(20);
     }
 }
