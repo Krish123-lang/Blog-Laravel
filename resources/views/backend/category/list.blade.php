@@ -40,7 +40,7 @@
                                         <td>{{ $value->meta_title }}</td>
                                         <td>{{ $value->meta_description }}</td>
                                         <td>{{ $value->meta_keywords }}</td>
-                                        <td>{{ empty($value->status) ? 'Active' : 'Inactive' }}</td>
+                                        <td>{{ !empty($value->status) ? 'Active' : 'Inactive' }}</td>
                                         <td>{{ date('Y-m-d H:i A', strtotime($value->created_at)) }} </td>
                                         <td>
                                             <a href="{{ route('backend.category.edit', $value->id) }}" class="btn btn-sm btn-warning">Edit</a>

@@ -8,6 +8,11 @@ class Category extends Model
 {
     protected $table = 'category';
 
+    static public function getSingle($id)
+    {
+        return Category::find($id);
+    }
+
     static public function getRecord()
     {
         return self::select('category.*')
