@@ -25,8 +25,7 @@
       </li><!-- End Profile Page Nav -->
 
       <li class="nav-item">
-        {{-- {{ route('backend.blog.list') }} --}}
-        <a class="nav-link @if(Request::segment(2) != 'blog') collapsed @endif" href="">
+        <a class="nav-link @if(Request::segment(2) != 'blog') collapsed @endif" href="{{ route('backend.blog.list') }}">
           <i class="bi bi-question-circle"></i>
           <span>Blog</span>
         </a>

@@ -26,8 +26,14 @@
   <link href="{{ asset('assets/auth/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
   <link href="{{ asset('assets/auth/vendor/simple-datatables/style.css') }}" rel="stylesheet">
 
+  {{-- TinyMCE Editor --}}
+  {{-- <script src="https://cdn.tiny.cloud/1/s8vxh9jel6z3d5sf9bo8nr85yc4rhai16ge99t7zquz9n2io/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script> --}}
+
   <!-- Template Main CSS File -->
   <link href="{{ asset('assets/auth/css/style.css') }}" rel="stylesheet">
+
+  {{-- Style --}}
+  @stack('style')
 </head>
 
 <body>
@@ -69,6 +75,9 @@
     @if (!in_array(Route::currentRouteName(), $authRoutes))
         @include('includes.auth.footer')
     @endif
+
+    {{-- Script --}}
+    @stack('script')
 </body>
 
 </html>
