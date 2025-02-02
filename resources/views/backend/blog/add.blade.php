@@ -12,7 +12,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Add Blog</h5>
 
-                        <form class="row g-3" action="{{ route('backend.category.store') }}" method="POST">
+                        <form class="row g-3" action="{{ route('backend.blog.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
 
                             <div class="col-md-12">
@@ -22,8 +22,10 @@
 
                             <div class="col-md-12">
                                 <label for="inputName5" class="form-label">Category</label>
-                                <select name="" id="" class="form-control">
-                                    <option value="">Select Category</option>
+                                <select name="category_id" id="" class="form-control">
+                                    @foreach ($getCategory as $value)
+                                        <option value="{{ $value->id }}">{{ $value->name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
 
@@ -56,8 +58,8 @@
                             </div>
 
                             <div class="col-md-12">
-                                <label for="is_published" class="form-label">Published</label>
-                                <select id="is_published" class="form-select" name="is_published">
+                                <label for="is_publish" class="form-label">Published</label>
+                                <select id="is_publish" class="form-select" name="is_publish">
                                     <option value="1">Yes</option>
                                     <option value="0">No</option>
                                 </select>

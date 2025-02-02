@@ -42,8 +42,9 @@ Route::group(['middleware' => AuthMiddleware::class], function () {
     Route::get('panel/category/edit/{id}', [CategoryController::class, 'category_edit'])->name('backend.category.edit');
     Route::put('panel/category/edit/{id}', [CategoryController::class, 'category_update'])->name('backend.category.update');
     Route::delete('panel/category/delete/{id}', [CategoryController::class, 'category_delete'])->name('backend.category.delete');
-
+    
     // Blog
     Route::get('panel/blog/list', [BlogController::class, 'blog_list'])->name('backend.blog.list');
     Route::get('panel/blog/add', [BlogController::class, 'blog_add'])->name('backend.blog.add');
+    Route::post('panel/blog/add', [BlogController::class, 'blog_store'])->name('backend.blog.store');
 });
