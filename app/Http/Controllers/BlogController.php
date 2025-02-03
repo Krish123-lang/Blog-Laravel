@@ -144,8 +144,8 @@ class BlogController extends Controller
         $save->meta_description = $meta_description;
         $save->meta_keywords = trim($request->meta_keywords);
 
-        // $save->is_publish = $request->is_publish ?? 0;
-        // $save->status = $request->status ?? 1;
+        $save->is_publish = $request->is_publish ?? 0;
+        $save->status = $request->status ?? 1;
 
         if (!empty($request->file('image_file'))) {
             if (!empty($save->getImage())) {

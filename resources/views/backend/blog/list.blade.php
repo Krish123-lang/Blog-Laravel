@@ -11,9 +11,65 @@
                 @include('includes.home.message')
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Blog List
+                        <h5 class="card-title">Blog List ({{$getRecord->total()}})
                             <a href="{{ route('backend.blog.add') }}" class="btn btn-sm btn-primary float-end">Add new</a>
                         </h5>
+
+                        <form class="row" method="GET" action="">
+                            <div class="col-md-1 mb-2">
+                                <label for="inputNanme4" class="form-label">ID</label>
+                                <input type="text" name="id" value="{{ Request::get('id') }}" class="form-control">
+                            </div>
+                            <div class="col-md-2 mb-2">
+                                <label for="inputNanme4" class="form-label">Username</label>
+                                <input type="text" name="username" value="{{ Request::get('username') }}" class="form-control">
+                            </div>
+                            <div class="col-md-3 mb-2">
+                                <label for="inputNanme4" class="form-label">Title</label>
+                                <input type="text" name="title" value="{{ Request::get('title') }}" class="form-control">
+                            </div>
+                            <div class="col-md-2 mb-2">
+                                <label for="inputNanme4" class="form-label">Category</label>
+                                <input type="text" name="category" value="{{ Request::get('category') }}" class="form-control">
+                                {{-- <select name="category" id="">
+                                    <option value="{{ Request::get('category') }}">{{ Request::get('category') }}</option>
+                                </select> --}}
+                            </div>
+                            
+                            <div class="col-md-2 mb-2">
+                                <label for="inputNanme4" class="form-label">Status</label>
+                                <select name="status" id="" class="form-control">
+                                    <option value="">Select</option>
+                                    <option {{ Request::get('status') == 1?'selected':'' }} value="1">Active</option>
+                                    <option {{ Request::get('status') == 100?'selected':'' }} value="100">Inactive</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-2 mb-2">
+                                <label for="inputNanme4" class="form-label">Publish</label>
+                                <select name="is_publish" id="" class="form-control">
+                                    <option value="">Select</option>
+                                    <option {{ Request::get('is_publish') == 1 ? 'selected':'' }} value="1">Yes</option>
+                                    <option {{ Request::get('is_publish') == 100?'selected':'' }} value="100">No</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-2 mb-2">
+                                <label for="inputNanme4" class="form-label">Start Date</label>
+                                <input type="date" name="start_date" value="{{ Request::get('start_date') }}" class="form-control">
+                            </div>
+
+                            <div class="col-md-2 mb-2">
+                                <label for="inputNanme4" class="form-label">End Date</label>
+                                <input type="date" name="end_date" value="{{ Request::get('end_date') }}" class="form-control">
+                            </div>
+
+                            <div class="col-md-2 d-flex align-items-end justify-content-center gap-2 mb-2">
+                                <button type="submit" class="btn btn-primary">Search</button>
+                                <a href="{{ route('backend.blog.list') }}" class="btn btn-secondary">Reset</a>
+                            </div>
+                        </form>
+                        <hr>
 
                         <table class="table table-striped">
                             <thead>
