@@ -1,7 +1,11 @@
 @extends('includes.auth.app')
 @section('title')
-    Add category
+    Add blog
 @endsection
+
+@push('style')
+    <link rel="stylesheet" href="{{ asset('assets/tagsinput/bootstrap-tagsinput.css') }}">
+@endpush
 
 @section('content')
     <section class="section">
@@ -87,4 +91,5 @@
 @endsection
 
 @push('script')
+    <script src="{{ asset('assets/tagsinput/bootstrap-tagsinput.js') }}"></script>
 @endpush
