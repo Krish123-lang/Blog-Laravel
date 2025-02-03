@@ -30,10 +30,21 @@
                             </div>
                             <div class="col-md-2 mb-2">
                                 <label for="inputNanme4" class="form-label">Category</label>
-                                <input type="text" name="category" value="{{ Request::get('category') }}" class="form-control">
+                                {{-- <input type="text" name="category" value="{{ Request::get('category') }}" class="form-control"> --}}
                                 {{-- <select name="category" id="">
                                     <option value="{{ Request::get('category') }}">{{ Request::get('category') }}</option>
                                 </select> --}}
+
+                                <select name="category" class="form-control">
+                                    <option value="">Select Category</option>
+                                    @foreach($getCategory as $category)
+                                        <option value="{{ $category->id }}" 
+                                            {{ request()->get('category') == $category->id ? 'selected' : '' }}>
+                                            {{ $category->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                
                             </div>
                             
                             <div class="col-md-2 mb-2">

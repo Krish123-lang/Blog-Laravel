@@ -29,8 +29,12 @@ class Blog extends Model
             $return = $return->where('blog.title', 'like', '%' . Request::get('title') . '%');
         }
 
+        // if (!empty(Request::get('category'))) {
+        //     $return = $return->where('category.name', 'like', '%' . Request::get('category') . '%');
+        // }
+
         if (!empty(Request::get('category'))) {
-            $return = $return->where('category.name', 'like', '%' . Request::get('category') . '%');
+            $return = $return->where('blog.category_id', '=', Request::get('category'));
         }
 
         if (!empty(Request::get('is_publish'))) {

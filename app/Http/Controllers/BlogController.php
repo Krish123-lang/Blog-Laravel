@@ -14,6 +14,7 @@ class BlogController extends Controller
     public function blog_list()
     {
         $data['getRecord'] = Blog::getRecord();
+        $data['getCategory'] = Category::where('status', 1)->get(); 
         return view('backend.blog.list', $data);
     }
 
