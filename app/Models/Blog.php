@@ -31,4 +31,9 @@ class Blog extends Model
     {
         return self::find($id);
     }
+
+    public function getTag()
+    {
+        return $this->hasMany(BlogTags::class, 'blog_id');
+    }
 }

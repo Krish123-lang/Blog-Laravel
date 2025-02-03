@@ -3,6 +3,10 @@
     Edit Blog
 @endsection
 
+@push('style')
+    <link rel="stylesheet" href="{{ asset('assets/tagsinput/bootstrap-tagsinput.css') }}">
+@endpush
+
 @section('content')
     <section class="section">
         <div class="row">
@@ -49,8 +53,14 @@
                             </div>
 
                             <div class="col-md-12">
+                                @php
+                                    $tags = '';
+                                    foreach ($getRecord->getTag as $value) {
+                                        $tags .= $value->name . ',';
+                                    }
+                                @endphp
                                 <label for="inputName5" class="form-label">Tags</label>
-                                <input type="text" class="form-control" id="inputName5" name="tags">
+                                <input type="text" id="tags" value="{{ $tags }}" class="form-control" id="inputName5" name="tags">
                             </div>
 
                             <div class="col-md-12">
@@ -77,7 +87,8 @@
                                 <label for="inputStatus" class="form-label">Status</label>
                                 <select id="inputStatus" class="form-select" name="status">
                                     <option {{ $getRecord->status == 1 ? 'selected' : '' }} value="1">Active</option>
-                                    <option {{ $getRecord->status == 0 ? 'selected' : '' }} value="0">Inactive</option>
+                                    <option {{ $getRecord->status == 0 ? 'selected' : '' }} value="0">Inactive
+                                    </option>
                                 </select>
                             </div>
 
@@ -93,3 +104,10 @@
         </div>
     </section>
 @endsection
+
+@push('script')
+    <script src="{{ asset('assets/tagsinput/bootstrap-tagsinput.js') }}"></script>
+    <script>
+        $("#tags").tagsinput();
+    </script>
+@endpush

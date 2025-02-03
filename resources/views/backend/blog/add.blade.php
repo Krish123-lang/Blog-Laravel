@@ -46,7 +46,7 @@
 
                             <div class="col-md-12">
                                 <label for="inputName5" class="form-label">Tags</label>
-                                <input type="text" class="form-control" id="inputName5" name="tags">
+                                <input type="text" id="tags" class="form-control" id="inputName5" name="tags">
                             </div>
 
                             <div class="col-md-12">
@@ -92,4 +92,7 @@
 
 @push('script')
     <script src="{{ asset('assets/tagsinput/bootstrap-tagsinput.js') }}"></script>
+    <script>
+        $("#tags").tagsinput();
+    </script>
 @endpush

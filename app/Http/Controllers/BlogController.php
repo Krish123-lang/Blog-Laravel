@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
+use App\Models\BlogTags;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -106,6 +107,7 @@ class BlogController extends Controller
         }
 
         $save->save();
+        BlogTags::InsertDeleteTags($save->id, $request->tags);
 
         return to_route('backend.blog.list')->with('success', 'Blog Created Successfully!');
     }
@@ -158,6 +160,7 @@ class BlogController extends Controller
 
         $save->save();
 
+        BlogTags::InsertDeleteTags($save->id, $request->tags);
         return to_route('backend.blog.list')->with('success', 'Blog Updated Successfully!');
     }
 
