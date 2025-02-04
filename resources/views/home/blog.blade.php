@@ -32,7 +32,7 @@
                         <div class="card border-0 shadow-sm mb-2">
                             <img class="card-img-top mb-2" src="{{ $value->getImage() }}" style="width: 100%; height: 233px; object-fit: cover;" alt="{{$value->title}}" />
                             <div class="card-body bg-light text-center p-4">
-                                <a href="{{ route('home.blog',$value->slug) }}" class="text-decoration-none">
+                                <a href="{{ url($value->slug) }}" class="text-decoration-none">
                                     <h4 class="">{!! strip_tags(Str::substr($value->title, 0, 25)) !!}</h4>
                                 </a>
                                 <div class="d-flex justify-content-center mb-3">
@@ -43,7 +43,7 @@
                                 <p>
                                     {!! strip_tags(Str::substr($value->description, 0, 165)) !!}
                                 </p>
-                                <a href="{{ route('home.blog',$value->slug) }}" class="btn btn-primary px-4 mx-auto my-2">Read More</a>
+                                <a href="{{ url($value->slug) }}" class="btn btn-primary px-4 mx-auto my-2">Read More</a>
                             </div>
                         </div>
                     </div>

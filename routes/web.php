@@ -29,6 +29,8 @@ Route::get('gallery', [HomeController::class, 'gallery'])->name('home.gallery');
 Route::get('blog', [HomeController::class, 'blog'])->name('home.blog');
 Route::get('contact', [HomeController::class, 'contact'])->name('home.contact');
 
+Route::get('{slug}', [HomeController::class, 'blog_detail'])->name('blog.detail');
+
 Route::group(['middleware' => AuthMiddleware::class], function () {
     // Dashboard
     Route::get('panel/dashboard', [DashboardController::class, 'dashboard'])->name('backend.dashboard');
