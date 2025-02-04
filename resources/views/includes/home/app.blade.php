@@ -27,6 +27,8 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="{{ asset('assets/home/css/style.css') }}" rel="stylesheet" />
+
+    @stack('style')
 </head>
 
 <body>
@@ -35,7 +37,7 @@
         <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0 px-lg-5">
             <a href="" class="navbar-brand font-weight-bold text-secondary" style="font-size: 50px">
                 <i class="flaticon-043-teddy-bear"></i>
-                <span class="text-primary">KidKinder</span>
+                <span class="text-primary">Blog</span>
             </a>
             <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                 <span class="navbar-toggler-icon"></span>
@@ -43,21 +45,14 @@
             <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                 <div class="navbar-nav font-weight-bold mx-auto py-0">
                     <a href="{{ route('home.home') }}" class="nav-item nav-link active">Home</a>
-                    <a href="about.html" class="nav-item nav-link">About</a>
-                    <a href="class.html" class="nav-item nav-link">Classes</a>
-                    <a href="team.html" class="nav-item nav-link">Teachers</a>
-                    <a href="gallery.html" class="nav-item nav-link">Gallery</a>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
-                        <div class="dropdown-menu rounded-0 m-0">
-                            <a href="blog.html" class="dropdown-item">Blog Grid</a>
-                            <a href="single.html" class="dropdown-item">Blog Detail</a>
-                        </div>
-                    </div>
-                    <a href="contact.html" class="nav-item nav-link">Contact</a>
+                    <a href="{{ route('home.about') }}" class="nav-item nav-link">About</a>
+                    <a href="{{ route('home.team') }}" class="nav-item nav-link">Team</a>
+                    <a href="{{ route('home.gallery') }}" class="nav-item nav-link">Gallery</a>
+                    <a href="{{ route('home.blog') }}" class="nav-item nav-link">Blog</a>
+                    <a href="{{ route('home.contact') }}" class="nav-item nav-link">Contact</a>
                 </div>
-                <a href="" class="btn btn-primary px-4">Login</a>
-                <a href="" class="btn btn-primary px-4">Register</a>
+                <a href="{{ route('auth.login') }}" class="btn btn-primary px-4 mr-2">Login</a>
+                <a href="{{ route('auth.register') }}" class="btn btn-primary px-4">Register</a>
             </div>
         </nav>
     </div>
@@ -120,7 +115,7 @@
                     <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
                     <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>About Us</a>
                     <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Classes</a>
-                    <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Teachers</a>
+                    <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Team</a>
                     <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Blog</a>
                     <a class="text-white" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
                 </div>
@@ -177,6 +172,8 @@
 
     <!-- Template Javascript -->
     <script src="{{ asset('assets/home/js/main.js') }}"></script>
+
+    @stack('script')
 </body>
 
 </html>

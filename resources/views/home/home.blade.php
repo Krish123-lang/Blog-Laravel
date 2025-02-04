@@ -360,9 +360,9 @@
         <div class="container">
             <div class="text-center pb-2">
                 <p class="section-title px-5">
-                    <span class="px-2">Our Teachers</span>
+                    <span class="px-2">Our Team</span>
                 </p>
-                <h1 class="mb-4">Meet Our Teachers</h1>
+                <h1 class="mb-4">Meet Our Team</h1>
             </div>
             <div class="row">
                 <div class="col-md-6 col-lg-3 text-center team mb-5">
@@ -379,7 +379,7 @@
                         </div>
                     </div>
                     <h4>Julia Smith</h4>
-                    <i>Music Teacher</i>
+                    <i>Music Team</i>
                 </div>
                 <div class="col-md-6 col-lg-3 text-center team mb-5">
                     <div class="position-relative overflow-hidden mb-4" style="border-radius: 100%">
@@ -395,7 +395,7 @@
                         </div>
                     </div>
                     <h4>Jhon Doe</h4>
-                    <i>Language Teacher</i>
+                    <i>Language Team</i>
                 </div>
                 <div class="col-md-6 col-lg-3 text-center team mb-5">
                     <div class="position-relative overflow-hidden mb-4" style="border-radius: 100%">
@@ -411,7 +411,7 @@
                         </div>
                     </div>
                     <h4>Mollie Ross</h4>
-                    <i>Dance Teacher</i>
+                    <i>Dance Team</i>
                 </div>
                 <div class="col-md-6 col-lg-3 text-center team mb-5">
                     <div class="position-relative overflow-hidden mb-4" style="border-radius: 100%">
@@ -427,7 +427,7 @@
                         </div>
                     </div>
                     <h4>Donald John</h4>
-                    <i>Art Teacher</i>
+                    <i>Art Team</i>
                 </div>
             </div>
         </div>

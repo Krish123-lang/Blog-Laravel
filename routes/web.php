@@ -23,6 +23,11 @@ Route::post('reset/{token}', [AuthController::class, 'post_reset'])->name('auth.
 Route::get('logout', [AuthController::class, 'logout'])->name('auth.logout');
 // Home
 Route::get('/', [HomeController::class, 'home'])->name('home.home');
+Route::get('about', [HomeController::class, 'about'])->name('home.about');
+Route::get('team', [HomeController::class, 'team'])->name('home.team');
+Route::get('gallery', [HomeController::class, 'gallery'])->name('home.gallery');
+Route::get('blog', [HomeController::class, 'blog'])->name('home.blog');
+Route::get('contact', [HomeController::class, 'contact'])->name('home.contact');
 
 Route::group(['middleware' => AuthMiddleware::class], function () {
     // Dashboard
@@ -42,7 +47,7 @@ Route::group(['middleware' => AuthMiddleware::class], function () {
     Route::get('panel/category/edit/{id}', [CategoryController::class, 'category_edit'])->name('backend.category.edit');
     Route::put('panel/category/edit/{id}', [CategoryController::class, 'category_update'])->name('backend.category.update');
     Route::delete('panel/category/delete/{id}', [CategoryController::class, 'category_delete'])->name('backend.category.delete');
-    
+
     // Blog
     Route::get('panel/blog/list', [BlogController::class, 'blog_list'])->name('backend.blog.list');
     Route::get('panel/blog/add', [BlogController::class, 'blog_add'])->name('backend.blog.add');
@@ -50,5 +55,4 @@ Route::group(['middleware' => AuthMiddleware::class], function () {
     Route::get('panel/blog/edit/{id}', [BlogController::class, 'blog_edit'])->name('backend.blog.edit');
     Route::put('panel/blog/edit/{id}', [BlogController::class, 'blog_update'])->name('backend.blog.update');
     Route::delete('panel/blog/delete/{id}', [BlogController::class, 'blog_delete'])->name('backend.blog.delete');
-    
 });
