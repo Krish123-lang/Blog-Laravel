@@ -11,6 +11,18 @@ class Blog extends Model
     use HasFactory;
     protected $table = 'blog';
 
+    static public function getRecordFront()
+    {
+        return self::select('blog.*', 'users.name as user_name', 'category.name as category_name')
+            ->join('users', 'users.id', '=', 'blog.user_id')
+            ->join('category', 'category.id', '=', 'blog.category_id')
+            ->where('blog.status', '=', 1)
+            ->where('blog.is_publish', '=', 1)
+            ->where('blog.is_delete', '=', 0)
+            ->orderBy('blog.id', 'desc')
+            ->paginate(20);
+    }
+
     static public function getRecord()
     {
         $return = self::select('blog.*', 'users.name as user_name', 'category.name as category_name')

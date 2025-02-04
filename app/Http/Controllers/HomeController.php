@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Blog;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -28,7 +29,8 @@ class HomeController extends Controller
 
     public function blog()
     {
-        return view('home.blog');
+        $data['getRecord'] = Blog::getRecordFront();
+        return view('home.blog', $data);
     }
 
     public function contact()
