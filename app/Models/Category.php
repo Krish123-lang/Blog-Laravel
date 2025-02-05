@@ -29,6 +29,24 @@ class Category extends Model
             ->get();
     }
 
+    static public function getCategoryMenu()
+    {
+        return self::select('category.*')
+            ->where('status', '=', 1)
+            ->where('is_menu', '=', 1)
+            ->where('is_delete', '=', 0)
+            ->get();
+    }
+
+    static public function getSlug($slug)
+    {
+        return self::select('category.*')
+            ->where('slug', '=', $slug)
+            ->where('status', '=', 1)
+            ->where('is_delete', '=', 0)
+            ->first();
+    }
+
     public function totalBlog()
     {
         return $this->hasMany(Blog::class, 'category_id')

@@ -43,13 +43,23 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                @php
+                    $getCategoryHeader = App\Models\Category::getCategoryMenu();
+                @endphp
                 <div class="navbar-nav font-weight-bold mx-auto py-0">
                     <a href="{{ route('home.home') }}" class="nav-item nav-link active">Home</a>
-                    <a href="{{ route('home.about') }}" class="nav-item nav-link">About</a>
+
+                    {{-- Please remove this disgusting line --}}
+                    @foreach ($getCategoryHeader as $CategoryHeader)
+                    <a href="{{ url($CategoryHeader->slug) }}" class="nav-item nav-link">{{ $CategoryHeader->name }}</a>
+                    @endforeach
+                    {{-- Please remove this disgusting line --}}
+                    
+                    {{-- <a href="{{ route('home.about') }}" class="nav-item nav-link">About</a>
                     <a href="{{ route('home.team') }}" class="nav-item nav-link">Team</a>
-                    <a href="{{ route('home.gallery') }}" class="nav-item nav-link">Gallery</a>
-                    <a href="{{ route('home.blog') }}" class="nav-item nav-link">Blog</a>
-                    <a href="{{ route('home.contact') }}" class="nav-item nav-link">Contact</a>
+                    <a href="{{ route('home.gallery') }}" class="nav-item nav-link">Gallery</a> --}}
+                    {{-- <a href="{{ route('home.blog') }}" class="nav-item nav-link">Blog</a> --}}
+                    {{-- <a href="{{ route('home.contact') }}" class="nav-item nav-link">Contact</a> --}}
                 </div>
                 <a href="{{ route('auth.login') }}" class="btn btn-primary px-4 mr-2">Login</a>
                 <a href="{{ route('auth.register') }}" class="btn btn-primary px-4">Register</a>

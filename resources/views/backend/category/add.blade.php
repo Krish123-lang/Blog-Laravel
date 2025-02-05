@@ -45,6 +45,14 @@
                             </div>
 
                             <div class="col-md-12">
+                                <label for="inputStatus" class="form-label">Menu</label>
+                                <select id="inputStatus" class="form-select" name="is_menu">
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-12">
                                 <label for="inputStatus" class="form-label">Status</label>
                                 <select id="inputStatus" class="form-select" name="status">
                                     <option value="1">Active</option>

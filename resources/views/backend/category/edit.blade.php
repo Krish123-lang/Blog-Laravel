@@ -49,6 +49,14 @@
                             </div>
 
                             <div class="col-md-12">
+                                <label for="inputStatus" class="form-label">Menu</label>
+                                <select id="inputStatus" class="form-select" name="is_menu">
+                                    <option {{ ($getRecord->is_menu == 1) ? 'selected' : '' }} value="1">Yes</option>
+                                    <option {{ ($getRecord->is_menu == 0) ? 'selected' : '' }} value="0">No</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-12">
                                 <label for="inputStatus" class="form-label">Status</label>
                                 <select id="inputStatus" class="form-select" name="status">
                                     <option {{ ($getRecord->status == 1) ? 'selected' : '' }} value="1">Active</option>

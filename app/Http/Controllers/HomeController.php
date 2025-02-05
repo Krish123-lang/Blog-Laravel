@@ -36,15 +36,21 @@ class HomeController extends Controller
 
     public function blog_detail($slug)
     {
-        $getRecord = Blog::getRecordSlug($slug);
-        if (!empty($getRecord)) {
-            $data['getCategory'] = Category::getCategory();
-            $data['getRecentPost'] = Blog::getRecentPost();
-            $data['getRelatedPost'] = Blog::getRelatedPost($getRecord->category_id, $getRecord->id);
-            $data['getRecord'] = $getRecord;
-            return view('home.blog_detail', $data);
+        $getCategory = Category::getSlug($slug);
+        if (!empty($getCategory)) {
+            $data['getRecord'] = Blog::getRecordFrontCategory($getCategory->id);
+            return view('home.blog', $data);
         } else {
-            abort(404);
+            $getRecord = Blog::getRecordSlug($slug);
+            if (!empty($getRecord)) {
+                $data['getCategory'] = Category::getCategory();
+                $data['getRecentPost'] = Blog::getRecentPost();
+                $data['getRelatedPost'] = Blog::getRelatedPost($getRecord->category_id, $getRecord->id);
+                $data['getRecord'] = $getRecord;
+                return view('home.blog_detail', $data);
+            } else {
+                abort(404);
+            }
         }
     }
 
