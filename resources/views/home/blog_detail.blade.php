@@ -154,12 +154,12 @@
 
                 <!-- Search Form -->
                 <div class="mb-5">
-                    <form action="">
+                    <form action="{{ route('home.blog') }}" method="GET">
                         <div class="input-group">
-                            <input type="text" class="form-control form-control-lg" placeholder="Keyword" />
+                            <input type="text" name="q" class="form-control form-control-lg" placeholder="Search" />
                             <div class="input-group-append">
-                                <span class="input-group-text bg-transparent text-primary"><i
-                                        class="fa fa-search"></i></span>
+                                <button class="input-group-text bg-transparent text-primary"><i
+                                        class="fa fa-search"></i></button>
                             </div>
                         </div>
                     </form>
@@ -212,7 +212,7 @@
                         <h2 class="mb-4">Tag Cloud</h2>
                         <div class="d-flex flex-wrap m-n1">
                             @foreach ($getRecord->getTag as $tag)
-                                <a href="" class="btn btn-outline-primary m-1">{{$tag->name}}</a>
+                                <a href="{{ url('blog?q='.$tag->name) }}" class="btn btn-outline-primary m-1">{{$tag->name}}</a>
                             @endforeach
                         </div>
                     </div>

@@ -13,14 +13,20 @@ class Blog extends Model
 
     static public function getRecordFront()
     {
-        return self::select('blog.*', 'users.name as user_name', 'category.name as category_name')
+        $return = self::select('blog.*', 'users.name as user_name', 'category.name as category_name')
             ->join('users', 'users.id', '=', 'blog.user_id')
-            ->join('category', 'category.id', '=', 'blog.category_id')
-            ->where('blog.status', '=', 1)
+            ->join('category', 'category.id', '=', 'blog.category_id');
+
+        if (!empty(Request::get('q'))) {
+            $return = $return->where('blog.title', 'like', '%' . Request::get('q') . '%');
+        }
+
+        $return = $return->where('blog.status', '=', 1)
             ->where('blog.is_publish', '=', 1)
             ->where('blog.is_delete', '=', 0)
             ->orderBy('blog.id', 'desc')
             ->paginate(20);
+        return $return;
     }
 
     static public function getRecentPost()
@@ -32,7 +38,7 @@ class Blog extends Model
             ->where('blog.is_publish', '=', 1)
             ->where('blog.is_delete', '=', 0)
             ->orderBy('blog.id', 'desc')
-            ->limit(3)  
+            ->limit(3)
             ->get();
     }
 
@@ -47,7 +53,7 @@ class Blog extends Model
             ->where('blog.is_publish', '=', 1)
             ->where('blog.is_delete', '=', 0)
             ->orderBy('blog.id', 'desc')
-            ->limit(5)  
+            ->limit(5)
             ->get();
     }
 
