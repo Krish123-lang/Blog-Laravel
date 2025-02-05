@@ -28,4 +28,13 @@ class Category extends Model
             ->where('is_delete', '=', 0)
             ->get();
     }
+
+    public function totalBlog()
+    {
+        return $this->hasMany(Blog::class, 'category_id')
+            ->where('blog.status', '=', 1)
+            ->where('blog.is_publish', '=', 1)
+            ->where('blog.is_delete', '=', 0)
+            ->count();
+    }
 }

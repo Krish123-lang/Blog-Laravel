@@ -23,6 +23,34 @@ class Blog extends Model
             ->paginate(20);
     }
 
+    static public function getRecentPost()
+    {
+        return self::select('blog.*', 'users.name as user_name', 'category.name as category_name')
+            ->join('users', 'users.id', '=', 'blog.user_id')
+            ->join('category', 'category.id', '=', 'blog.category_id')
+            ->where('blog.status', '=', 1)
+            ->where('blog.is_publish', '=', 1)
+            ->where('blog.is_delete', '=', 0)
+            ->orderBy('blog.id', 'desc')
+            ->limit(3)  
+            ->get();
+    }
+
+    static public function getRelatedPost($category_id, $id)
+    {
+        return self::select('blog.*', 'users.name as user_name', 'category.name as category_name')
+            ->join('users', 'users.id', '=', 'blog.user_id')
+            ->join('category', 'category.id', '=', 'blog.category_id')
+            ->where('blog.id', '!=', $id)
+            ->where('blog.category_id', '=', $category_id)
+            ->where('blog.status', '=', 1)
+            ->where('blog.is_publish', '=', 1)
+            ->where('blog.is_delete', '=', 0)
+            ->orderBy('blog.id', 'desc')
+            ->limit(5)  
+            ->get();
+    }
+
     static public function getRecordSlug($slug)
     {
         return self::select('blog.*', 'users.name as user_name', 'category.name as category_name')

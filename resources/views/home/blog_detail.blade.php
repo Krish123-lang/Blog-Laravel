@@ -11,63 +11,50 @@
                 <div class="d-flex flex-column text-left mb-3">
                     <h1 class="mb-3">{{ $getRecord->title }}</h1>
                     <div class="d-flex">
-                        <p class="mr-3"><i class="fa fa-user text-primary"></i>{{$getRecord->user_name}}</p>
+                        <p class="mr-3"><i class="fa fa-user text-primary"></i>{{ $getRecord->user_name }}</p>
                         <p class="mr-3">
-                            <i class="fa fa-folder text-primary"></i>{{$getRecord->category_name}}
+                            <i class="fa fa-folder text-primary"></i>{{ $getRecord->category_name }}
                         </p>
                         <p class="mr-3"><i class="fa fa-comments text-primary"></i> 15</p>
                     </div>
                 </div>
                 <div class="mb-5">
                     @if (!empty($getRecord->getImage()))
-                        <img class="img-fluid rounded w-100 mb-4" src={{$getRecord->getImage()}} style="width: 100%;  object-fit: cover;" alt="{{$getRecord->title}}" />
+                        <img class="img-fluid rounded w-100 mb-4" src={{ $getRecord->getImage() }}
+                            style="width: 100%;  object-fit: cover;" alt="{{ $getRecord->title }}" />
                     @endif
-                    
+
                     <p>{!! $getRecord->description !!}</p>
                 </div>
 
                 <!-- Related Post -->
-                <div class="mb-5 mx-n3">
-                    <h2 class="mb-4 ml-3">Related Post</h2>
-                    <div class="owl-carousel post-carousel position-relative">
-                        <div class="d-flex align-items-center bg-light shadow-sm rounded overflow-hidden mx-3">
-                            <img class="img-fluid" src="img/post-1.jpg" style="width: 80px; height: 80px" />
-                            <div class="pl-3">
-                                <h5 class="">Diam amet eos at no eos</h5>
-                                <div class="d-flex">
-                                    <small class="mr-3"><i class="fa fa-user text-primary"></i> Admin</small>
-                                    <small class="mr-3"><i class="fa fa-folder text-primary"></i> Web
-                                        Design</small>
-                                    <small class="mr-3"><i class="fa fa-comments text-primary"></i> 15</small>
+                @if (!empty($getRelatedPost->count()))
+                    <div class="mb-5 mx-n3">
+                        <h2 class="mb-4 ml-3">Related Post</h2>
+                        <div class="owl-carousel post-carousel position-relative">
+
+                            @foreach ($getRelatedPost as $related)
+                                <div class="d-flex align-items-center bg-light shadow-sm rounded overflow-hidden mx-3">
+                                    <img class="img-fluid" src="{{ $related->getImage() }}"
+                                        style="width: 80px; height: 80px; object-fit: cover;" />
+                                    <div class="pl-3">
+                                        <a href="{{ url($related->slug) }}" class="text-decoration-none">
+                                            <h5 class="">{!! strip_tags(Str::substr($related->title, 0, 10)) !!}</h5>
+                                        </a>
+                                        <div class="d-flex">
+                                            <small class="mr-3"><i
+                                                    class="fa fa-user text-primary"></i>{{ $related->user_name }}</small>
+                                            <small class="mr-3"><i
+                                                    class="fa fa-folder text-primary"></i>{{ $related->category_name }}</small>
+                                            <small class="mr-3"><i class="fa fa-comments text-primary"></i>0</small>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="d-flex align-items-center bg-light shadow-sm rounded overflow-hidden mx-3">
-                            <img class="img-fluid" src="img/post-2.jpg" style="width: 80px; height: 80px" />
-                            <div class="pl-3">
-                                <h5 class="">Diam amet eos at no eos</h5>
-                                <div class="d-flex">
-                                    <small class="mr-3"><i class="fa fa-user text-primary"></i> Admin</small>
-                                    <small class="mr-3"><i class="fa fa-folder text-primary"></i> Web
-                                        Design</small>
-                                    <small class="mr-3"><i class="fa fa-comments text-primary"></i> 15</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="d-flex align-items-center bg-light shadow-sm rounded overflow-hidden mx-3">
-                            <img class="img-fluid" src="img/post-3.jpg" style="width: 80px; height: 80px" />
-                            <div class="pl-3">
-                                <h5 class="">Diam amet eos at no eos</h5>
-                                <div class="d-flex">
-                                    <small class="mr-3"><i class="fa fa-user text-primary"></i> Admin</small>
-                                    <small class="mr-3"><i class="fa fa-folder text-primary"></i> Web
-                                        Design</small>
-                                    <small class="mr-3"><i class="fa fa-comments text-primary"></i> 15</small>
-                                </div>
-                            </div>
+                            @endforeach
+
                         </div>
                     </div>
-                </div>
+                @endif
 
                 <!-- Comment List -->
                 <div class="mb-5">
@@ -155,7 +142,7 @@
 
             <div class="col-lg-4 mt-5 mt-lg-0">
                 <!-- Author Bio -->
-                <div class="d-flex flex-column text-center bg-primary rounded mb-5 py-5 px-4">
+                {{-- <div class="d-flex flex-column text-center bg-primary rounded mb-5 py-5 px-4">
                     <img src="img/user.jpg" class="img-fluid rounded-circle mx-auto mb-3" style="width: 100px" />
                     <h3 class="text-secondary mb-3">John Doe</h3>
                     <p class="text-white m-0">
@@ -163,7 +150,7 @@
                         ipsum ipsum sit no ut est. Guber ea ipsum erat kasd amet est elitr
                         ea sit.
                     </p>
-                </div>
+                </div> --}}
 
                 <!-- Search Form -->
                 <div class="mb-5">
@@ -182,103 +169,54 @@
                 <div class="mb-5">
                     <h2 class="mb-4">Categories</h2>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                            <a href="">Web Design</a>
-                            <span class="badge badge-primary badge-pill">150</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                            <a href="">Web Development</a>
-                            <span class="badge badge-primary badge-pill">131</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                            <a href="">Online Marketing</a>
-                            <span class="badge badge-primary badge-pill">78</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                            <a href="">Keyword Research</a>
-                            <span class="badge badge-primary badge-pill">56</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                            <a href="">Email Marketing</a>
-                            <span class="badge badge-primary badge-pill">98</span>
-                        </li>
-                    </ul>
-                </div>
 
-                <!-- Single Image -->
-                <div class="mb-5">
-                    <img src="img/blog-1.jpg" alt="" class="img-fluid rounded" />
+                        @foreach ($getCategory as $category)
+                            <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                                <a href="">{{ $category->name }}</a>
+                                <span class="badge badge-primary badge-pill">{{ $category->totalBlog() }}</span>
+                            </li>
+                        @endforeach
+
+                    </ul>
                 </div>
 
                 <!-- Recent Post -->
                 <div class="mb-5">
                     <h2 class="mb-4">Recent Post</h2>
-                    <div class="d-flex align-items-center bg-light shadow-sm rounded overflow-hidden mb-3">
-                        <img class="img-fluid" src="img/post-1.jpg" style="width: 80px; height: 80px" />
-                        <div class="pl-3">
-                            <h5 class="">Diam amet eos at no eos</h5>
-                            <div class="d-flex">
-                                <small class="mr-3"><i class="fa fa-user text-primary"></i> Admin</small>
-                                <small class="mr-3"><i class="fa fa-folder text-primary"></i> Web Design</small>
-                                <small class="mr-3"><i class="fa fa-comments text-primary"></i> 15</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="d-flex align-items-center bg-light shadow-sm rounded overflow-hidden mb-3">
-                        <img class="img-fluid" src="img/post-2.jpg" style="width: 80px; height: 80px" />
-                        <div class="pl-3">
-                            <h5 class="">Diam amet eos at no eos</h5>
-                            <div class="d-flex">
-                                <small class="mr-3"><i class="fa fa-user text-primary"></i> Admin</small>
-                                <small class="mr-3"><i class="fa fa-folder text-primary"></i> Web Design</small>
-                                <small class="mr-3"><i class="fa fa-comments text-primary"></i> 15</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="d-flex align-items-center bg-light shadow-sm rounded overflow-hidden mb-3">
-                        <img class="img-fluid" src="img/post-3.jpg" style="width: 80px; height: 80px" />
-                        <div class="pl-3">
-                            <h5 class="">Diam amet eos at no eos</h5>
-                            <div class="d-flex">
-                                <small class="mr-3"><i class="fa fa-user text-primary"></i> Admin</small>
-                                <small class="mr-3"><i class="fa fa-folder text-primary"></i> Web Design</small>
-                                <small class="mr-3"><i class="fa fa-comments text-primary"></i> 15</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- Single Image -->
-                <div class="mb-5">
-                    <img src="img/blog-2.jpg" alt="" class="img-fluid rounded" />
+                    @foreach ($getRecentPost as $recent)
+                        <div class="d-flex align-items-center bg-light shadow-sm rounded overflow-hidden mb-3">
+                            @if (!empty($recent->getImage()))
+                                <img class="img-fluid" src="{{ $recent->getImage() }}"
+                                    style="width: 80px; height: 80px; object-fit: cover" />
+                            @endif
+                            <div class="pl-3">
+                                <a href="{{ url($recent->slug) }}" class="text-decoration-none">
+                                    <h5 class="">{!! strip_tags(Str::substr($recent->title, 0, 10)) !!}</h5>
+                                </a>
+                                <div class="d-flex">
+                                    <small class="mr-3"><i
+                                            class="fa fa-user text-primary"></i>{{ $recent->user_name }}</small>
+                                    <small class="mr-3"><i
+                                            class="fa fa-folder text-primary"></i>{{ $recent->category_name }}</small>
+                                    <small class="mr-3"><i class="fa fa-comments text-primary"></i>0</small>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
 
                 <!-- Tag Cloud -->
-                <div class="mb-5">
-                    <h2 class="mb-4">Tag Cloud</h2>
-                    <div class="d-flex flex-wrap m-n1">
-                        <a href="" class="btn btn-outline-primary m-1">Design</a>
-                        <a href="" class="btn btn-outline-primary m-1">Development</a>
-                        <a href="" class="btn btn-outline-primary m-1">Marketing</a>
-                        <a href="" class="btn btn-outline-primary m-1">SEO</a>
-                        <a href="" class="btn btn-outline-primary m-1">Writing</a>
-                        <a href="" class="btn btn-outline-primary m-1">Consulting</a>
+                @if (!empty($getRecord->getTag->count()))
+                    <div class="mb-5">
+                        <h2 class="mb-4">Tag Cloud</h2>
+                        <div class="d-flex flex-wrap m-n1">
+                            @foreach ($getRecord->getTag as $tag)
+                                <a href="" class="btn btn-outline-primary m-1">{{$tag->name}}</a>
+                            @endforeach
+                        </div>
                     </div>
-                </div>
-
-                <!-- Single Image -->
-                <div class="mb-5">
-                    <img src="img/blog-3.jpg" alt="" class="img-fluid rounded" />
-                </div>
-
-                <!-- Plain Text -->
-                <div>
-                    <h2 class="mb-4">Plain Text</h2>
-                    Aliquyam sed lorem stet diam dolor sed ut sit. Ut sanctus erat ea
-                    est aliquyam dolor et. Et no consetetur eos labore ea erat voluptua
-                    et. Et aliquyam dolore sed erat. Magna sanctus sed eos tempor rebum
-                    dolor, tempor takimata clita sit et elitr ut eirmod.
-                </div>
+                @endif
             </div>
         </div>
     </div>

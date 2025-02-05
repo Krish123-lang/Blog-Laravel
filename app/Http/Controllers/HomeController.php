@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -37,6 +38,9 @@ class HomeController extends Controller
     {
         $getRecord = Blog::getRecordSlug($slug);
         if (!empty($getRecord)) {
+            $data['getCategory'] = Category::getCategory();
+            $data['getRecentPost'] = Blog::getRecentPost();
+            $data['getRelatedPost'] = Blog::getRelatedPost($getRecord->category_id, $getRecord->id);
             $data['getRecord'] = $getRecord;
             return view('home.blog_detail', $data);
         } else {
