@@ -2,12 +2,16 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta charset="utf-8" />
+    <title>@yield('title') {{ !empty($meta_title) ? $meta_title : '' }} </title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    @if (!empty($meta_keywords))
+        <meta content="{{$meta_keywords}}" name="keywords" />
+    @endif
 
-  <title> @yield('title') - {{ config('app.name') }} </title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
+    @if (!empty($meta_description))
+        <meta content="{{ $meta_description }}" name="description" />
+    @endif
 
   <!-- Favicons -->
   <link href="{{ asset('assets/auth/img/favicon.png') }}" rel="icon">

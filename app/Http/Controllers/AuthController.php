@@ -9,23 +9,36 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use App\Mail\RegisterMail;
+use App\Models\Page;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
     public function register()
     {
-        return view('auth.register');
+        $getPage = Page::getSlug('register');
+        $data['meta_title'] = !empty($getPage) ? $getPage->meta_title : '';
+        $data['meta_description'] = !empty($getPage) ? $getPage->meta_description : '';
+        $data['meta_keywords'] = !empty($getPage) ? $getPage->meta_keywords : '';
+        return view('auth.register', $data);
     }
 
     public function login()
     {
-        return view('auth.login');
+        $getPage = Page::getSlug('login');
+        $data['meta_title'] = !empty($getPage) ? $getPage->meta_title : '';
+        $data['meta_description'] = !empty($getPage) ? $getPage->meta_description : '';
+        $data['meta_keywords'] = !empty($getPage) ? $getPage->meta_keywords : '';
+        return view('auth.login', $data);
     }
 
     public function forgot_password()
     {
-        return view('auth.forgot_password');
+        $getPage = Page::getSlug('forgot_password');
+        $data['meta_title'] = !empty($getPage) ? $getPage->meta_title : '';
+        $data['meta_description'] = !empty($getPage) ? $getPage->meta_description : '';
+        $data['meta_keywords'] = !empty($getPage) ? $getPage->meta_keywords : '';
+        return view('auth.forgot_password', $data);
     }
 
     public function post_reset($token, Request $request)
@@ -53,6 +66,11 @@ class AuthController extends Controller
     {
         $user = User::where('remember_token', '=', $token)->first();
         if (!empty($user)) {
+            $getPage = Page::getSlug('reset');
+            $data['meta_title'] = !empty($getPage) ? $getPage->meta_title : '';
+            $data['meta_description'] = !empty($getPage) ? $getPage->meta_description : '';
+            $data['meta_keywords'] = !empty($getPage) ? $getPage->meta_keywords : '';
+
             $data['user'] = $user;
             return view('auth.reset', $data);
         } else {

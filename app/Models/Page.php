@@ -19,4 +19,9 @@ class Page extends Model
     {
         return self::get();
     }
+
+    static public function getSlug($slug)
+    {
+        return self::where('slug', '=', $slug)->first();
+    }
 }
