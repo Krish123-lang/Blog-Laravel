@@ -13,7 +13,7 @@ class Blog extends Model
 
     static public function getRecordFront()
     {
-        $return = self::select('blog.*', 'users.name as user_name', 'category.name as category_name')
+        $return = self::select('blog.*', 'users.name as user_name', 'category.name as category_name', 'category.slug as category_slug')
             ->join('users', 'users.id', '=', 'blog.user_id')
             ->join('category', 'category.id', '=', 'blog.category_id');
 
@@ -31,7 +31,7 @@ class Blog extends Model
 
     static public function getRecordFrontCategory($category_id)
     {
-        $return = self::select('blog.*', 'users.name as user_name', 'category.name as category_name')
+        $return = self::select('blog.*', 'users.name as user_name', 'category.name as category_name', 'category.slug as category_slug')
             ->join('users', 'users.id', '=', 'blog.user_id')
             ->join('category', 'category.id', '=', 'blog.category_id')
             ->where('blog.category_id', '=', $category_id)
@@ -45,7 +45,7 @@ class Blog extends Model
 
     static public function getRecentPost()
     {
-        return self::select('blog.*', 'users.name as user_name', 'category.name as category_name')
+        return self::select('blog.*', 'users.name as user_name', 'category.name as category_name', 'category.slug as category_slug')
             ->join('users', 'users.id', '=', 'blog.user_id')
             ->join('category', 'category.id', '=', 'blog.category_id')
             ->where('blog.status', '=', 1)
@@ -58,7 +58,7 @@ class Blog extends Model
 
     static public function getRelatedPost($category_id, $id)
     {
-        return self::select('blog.*', 'users.name as user_name', 'category.name as category_name')
+        return self::select('blog.*', 'users.name as user_name', 'category.name as category_name', 'category.slug as category_slug')
             ->join('users', 'users.id', '=', 'blog.user_id')
             ->join('category', 'category.id', '=', 'blog.category_id')
             ->where('blog.id', '!=', $id)
@@ -73,7 +73,7 @@ class Blog extends Model
 
     static public function getRecordSlug($slug)
     {
-        return self::select('blog.*', 'users.name as user_name', 'category.name as category_name')
+        return self::select('blog.*', 'users.name as user_name', 'category.name as category_name', 'category.slug as category_slug')
             ->join('users', 'users.id', '=', 'blog.user_id')
             ->join('category', 'category.id', '=', 'blog.category_id')
             ->where('blog.status', '=', 1)
@@ -85,7 +85,7 @@ class Blog extends Model
 
     static public function getRecord()
     {
-        $return = self::select('blog.*', 'users.name as user_name', 'category.name as category_name')
+        $return = self::select('blog.*', 'users.name as user_name', 'category.name as category_name', 'category.slug as category_slug')
             ->join('users', 'users.id', '=', 'blog.user_id')
             ->join('category', 'category.id', '=', 'blog.category_id');
 

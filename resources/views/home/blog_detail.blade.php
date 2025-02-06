@@ -13,7 +13,7 @@
                     <div class="d-flex">
                         <p class="mr-3"><i class="fa fa-user text-primary"></i>{{ $getRecord->user_name }}</p>
                         <p class="mr-3">
-                            <i class="fa fa-folder text-primary"></i>{{ $getRecord->category_name }}
+                            <a href="{{ url($getRecord->category_slug) }}"><i class="fa fa-folder text-primary"></i>{{ $getRecord->category_name }}</a>
                         </p>
                         <p class="mr-3"><i class="fa fa-comments text-primary"></i> 15</p>
                     </div>
@@ -42,10 +42,12 @@
                                             <h5 class="">{!! strip_tags(Str::substr($related->title, 0, 10)) !!}</h5>
                                         </a>
                                         <div class="d-flex">
-                                            <small class="mr-3"><i
-                                                    class="fa fa-user text-primary"></i>{{ $related->user_name }}</small>
-                                            <small class="mr-3"><i
-                                                    class="fa fa-folder text-primary"></i>{{ $related->category_name }}</small>
+                                            <small class="mr-3"><i class="fa fa-user text-primary"></i>{{ $related->user_name }}</small>
+                                            <small class="mr-3"> 
+                                                <a href="{{ url($related->category_slug) }}"> 
+                                                    <i class="fa fa-folder text-primary"></i>{{ $related->category_slug }}
+                                                </a>
+                                            </small>
                                             <small class="mr-3"><i class="fa fa-comments text-primary"></i>0</small>
                                         </div>
                                     </div>
@@ -172,7 +174,7 @@
 
                         @foreach ($getCategory as $category)
                             <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                                <a href="">{{ $category->name }}</a>
+                                <a href="{{ url($category->slug) }}">{{ $category->name }}</a>
                                 <span class="badge badge-primary badge-pill">{{ $category->totalBlog() }}</span>
                             </li>
                         @endforeach
@@ -197,8 +199,11 @@
                                 <div class="d-flex">
                                     <small class="mr-3"><i
                                             class="fa fa-user text-primary"></i>{{ $recent->user_name }}</small>
-                                    <small class="mr-3"><i
-                                            class="fa fa-folder text-primary"></i>{{ $recent->category_name }}</small>
+                                    <small class="mr-3">
+                                        <a href="{{ url($recent->category_slug) }}">
+                                            <i class="fa fa-folder text-primary"></i>{{ $recent->category_name }}
+                                        </a>
+                                    </small>
                                     <small class="mr-3"><i class="fa fa-comments text-primary"></i>0</small>
                                 </div>
                             </div>

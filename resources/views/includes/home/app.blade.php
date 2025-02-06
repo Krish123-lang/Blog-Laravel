@@ -52,11 +52,11 @@
                     $getCategoryHeader = App\Models\Category::getCategoryMenu();
                 @endphp
                 <div class="navbar-nav font-weight-bold mx-auto py-0">
-                    <a href="{{ route('home.home') }}" class="nav-item nav-link active">Home</a>
+                    <a href="{{ route('home.home') }}" class="nav-item nav-link @if (Request::segment(1)=='') active @endif ">Home</a>
 
                     {{-- Please remove this disgusting line --}}
                     @foreach ($getCategoryHeader as $CategoryHeader)
-                    <a href="{{ url($CategoryHeader->slug) }}" class="nav-item nav-link">{{ $CategoryHeader->name }}</a>
+                        <a href="{{ url($CategoryHeader->slug) }}" class="nav-item nav-link @if (Request::segment(1)== $CategoryHeader->slug) active @endif ">{{ $CategoryHeader->name }}</a>
                     @endforeach
                     {{-- Please remove this disgusting line --}}
                     
