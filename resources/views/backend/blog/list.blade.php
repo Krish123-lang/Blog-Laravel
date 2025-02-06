@@ -20,10 +20,13 @@
                                 <label for="inputNanme4" class="form-label">ID</label>
                                 <input type="text" name="id" value="{{ Request::get('id') }}" class="form-control">
                             </div>
-                            <div class="col-md-2 mb-2">
-                                <label for="inputNanme4" class="form-label">Username</label>
-                                <input type="text" name="username" value="{{ Request::get('username') }}" class="form-control">
-                            </div>
+
+                            @if (Auth::user()->is_admin == 1)
+                                <div class="col-md-2 mb-2">
+                                    <label for="inputNanme4" class="form-label">Username</label>
+                                    <input type="text" name="username" value="{{ Request::get('username') }}" class="form-control">
+                                </div>
+                            @endif
                             <div class="col-md-3 mb-2">
                                 <label for="inputNanme4" class="form-label">Title</label>
                                 <input type="text" name="title" value="{{ Request::get('title') }}" class="form-control">
@@ -87,7 +90,9 @@
                                 <tr>
                                     <th scope="col">Id</th>
                                     <th scope="col">Image</th>
-                                    <th scope="col">Username</th>
+                                    @if (Auth::user()->is_admin == 1)
+                                        <th scope="col">Username</th>
+                                    @endif
                                     <th scope="col">Title</th>
                                     <th scope="col">Category</th>
                                     <th scope="col">Status</th>
@@ -106,7 +111,9 @@
                                                     alt="{{ $value->title }}">
                                             @endif
                                         </td>
-                                        <td>{{ $value->user_name }}</td>
+                                        @if (Auth::user()->is_admin == 1)
+                                            <td>{{ $value->user_name }}</td>
+                                        @endif
                                         <td>{{ $value->title }}</td>
                                         <td>{{ $value->category_name }}</td>
                                         <td>{{ !empty($value->status) ? 'Active' : 'Inactive' }}</td>

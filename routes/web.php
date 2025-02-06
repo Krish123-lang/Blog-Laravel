@@ -7,6 +7,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\UserController;
+use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\AuthMiddleware;
 use Illuminate\Support\Facades\Route;
 
@@ -32,9 +33,7 @@ Route::get('contact', [HomeController::class, 'contact'])->name('home.contact');
 
 Route::get('{slug}', [HomeController::class, 'blog_detail'])->name('blog.detail');
 
-Route::group(['middleware' => AuthMiddleware::class], function () {
-    // Dashboard
-    Route::get('panel/dashboard', [DashboardController::class, 'dashboard'])->name('backend.dashboard');
+Route::group(['middleware' => AdminMiddleware::class], function () {
 
     Route::get('panel/user/list', [UserController::class, 'user_list'])->name('backend.user.list');
     Route::get('panel/user/add', [UserController::class, 'user_add'])->name('backend.user.add');
@@ -51,14 +50,6 @@ Route::group(['middleware' => AuthMiddleware::class], function () {
     Route::put('panel/category/edit/{id}', [CategoryController::class, 'category_update'])->name('backend.category.update');
     Route::delete('panel/category/delete/{id}', [CategoryController::class, 'category_delete'])->name('backend.category.delete');
 
-    // Blog
-    Route::get('panel/blog/list', [BlogController::class, 'blog_list'])->name('backend.blog.list');
-    Route::get('panel/blog/add', [BlogController::class, 'blog_add'])->name('backend.blog.add');
-    Route::post('panel/blog/add', [BlogController::class, 'blog_store'])->name('backend.blog.store');
-    Route::get('panel/blog/edit/{id}', [BlogController::class, 'blog_edit'])->name('backend.blog.edit');
-    Route::put('panel/blog/edit/{id}', [BlogController::class, 'blog_update'])->name('backend.blog.update');
-    Route::delete('panel/blog/delete/{id}', [BlogController::class, 'blog_delete'])->name('backend.blog.delete');
-
     // Pages
     Route::get('panel/pages/list', [PagesController::class, 'pages_list'])->name('backend.pages.list');
     Route::get('panel/pages/add', [PagesController::class, 'pages_add'])->name('backend.pages.add');
@@ -66,4 +57,17 @@ Route::group(['middleware' => AuthMiddleware::class], function () {
     Route::get('panel/pages/edit/{id}', [PagesController::class, 'pages_edit'])->name('backend.pages.edit');
     Route::put('panel/pages/edit/{id}', [PagesController::class, 'pages_update'])->name('backend.pages.update');
     Route::delete('panel/pages/delete/{page}', [PagesController::class, 'pages_delete'])->name('backend.pages.delete');
+});
+
+Route::group(['middleware' => AuthMiddleware::class], function () {
+    // Dashboard
+    Route::get('panel/dashboard', [DashboardController::class, 'dashboard'])->name('backend.dashboard');
+
+    // Blog
+    Route::get('panel/blog/list', [BlogController::class, 'blog_list'])->name('backend.blog.list');
+    Route::get('panel/blog/add', [BlogController::class, 'blog_add'])->name('backend.blog.add');
+    Route::post('panel/blog/add', [BlogController::class, 'blog_store'])->name('backend.blog.store');
+    Route::get('panel/blog/edit/{id}', [BlogController::class, 'blog_edit'])->name('backend.blog.edit');
+    Route::put('panel/blog/edit/{id}', [BlogController::class, 'blog_update'])->name('backend.blog.update');
+    Route::delete('panel/blog/delete/{id}', [BlogController::class, 'blog_delete'])->name('backend.blog.delete');
 });

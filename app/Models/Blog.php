@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Blog extends Model
 {
@@ -88,6 +89,10 @@ class Blog extends Model
         $return = self::select('blog.*', 'users.name as user_name', 'category.name as category_name', 'category.slug as category_slug')
             ->join('users', 'users.id', '=', 'blog.user_id')
             ->join('category', 'category.id', '=', 'blog.category_id');
+
+        if (!empty(Auth::check()) && Auth::user()->is_admin != 1) {
+            $return = $return->where('blog.user_id', '=', Auth::user()->id);
+        }
 
         if (!empty(Request::get('id'))) {
             $return = $return->where('blog.id', '=', Request::get('id'));
