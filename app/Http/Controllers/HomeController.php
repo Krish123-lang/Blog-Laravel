@@ -10,7 +10,8 @@ class HomeController extends Controller
 {
     public function home()
     {
-        return view('home.home');
+        $data['meta_title'] = 'Blog';
+        return view('home.home', $data);
     }
 
     public function about()
@@ -38,6 +39,11 @@ class HomeController extends Controller
     {
         $getCategory = Category::getSlug($slug);
         if (!empty($getCategory)) {
+            $data['meta_title'] = $getCategory->meta_title;
+            $data['meta_description'] = $getCategory->meta_description;
+            $data['meta_keywords'] = $getCategory->meta_keywords;
+            $data['header_title'] = $getCategory->title;
+
             $data['getRecord'] = Blog::getRecordFrontCategory($getCategory->id);
             return view('home.blog', $data);
         } else {
@@ -47,6 +53,11 @@ class HomeController extends Controller
                 $data['getRecentPost'] = Blog::getRecentPost();
                 $data['getRelatedPost'] = Blog::getRelatedPost($getRecord->category_id, $getRecord->id);
                 $data['getRecord'] = $getRecord;
+
+                $data['meta_title'] = $getRecord->title;
+                $data['meta_description'] = $getRecord->meta_description;
+                $data['meta_keywords'] = $getRecord->meta_keywords;
+
                 return view('home.blog_detail', $data);
             } else {
                 abort(404);

@@ -3,10 +3,15 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>@yield('title') | Blog</title>
+    <title>@yield('title') {{ !empty($meta_title) ? $meta_title : '' }} </title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <meta content="Free HTML Templates" name="keywords" />
-    <meta content="Free HTML Templates" name="description" />
+    @if (!empty($meta_keywords))
+        <meta content="{{$meta_keywords}}" name="keywords" />
+    @endif
+
+    @if (!empty($meta_description))
+        <meta content="{{ $meta_description }}" name="description" />
+    @endif
 
     <!-- Favicon -->
     <link href="{{ asset('assets/home/img/favicon.ico') }}" rel="icon" />
