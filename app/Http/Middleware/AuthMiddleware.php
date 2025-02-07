@@ -20,7 +20,7 @@ class AuthMiddleware
             return $next($request);
         } else {
             Auth::logout();
-            return redirect(url(''));
+            return redirect(url('login'));
         }
     }
 }

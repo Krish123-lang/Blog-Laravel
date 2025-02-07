@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
+use App\Models\BlogComment;
 use App\Models\Category;
 use App\Models\Page;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -93,5 +95,16 @@ class HomeController extends Controller
                 abort(404);
             }
         }
+    }
+
+    public function BlogCommentSubmit(Request $request)
+    {
+        $save = new BlogComment;
+        $save->user_id = Auth::user()->id;
+        $save->blog_id = $request->blog_id;
+        $save->comment = $request->comment;
+        $save->save();
+
+        return redirect()->back()->with('success', 'Your comment has been posted!');
     }
 }

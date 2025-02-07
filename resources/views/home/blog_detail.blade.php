@@ -8,6 +8,9 @@
     <div class="container py-5">
         <div class="row">
             <div class="col-lg-8">
+
+                @include('includes.home.message')
+
                 <div class="d-flex flex-column text-left mb-3">
                     <h1 class="mb-3">{{ $getRecord->title }}</h1>
                     <div class="d-flex">
@@ -15,7 +18,7 @@
                         <p class="mr-3">
                             <a href="{{ url($getRecord->category_slug) }}"><i class="fa fa-folder text-primary"></i>{{ $getRecord->category_name }}</a>
                         </p>
-                        <p class="mr-3"><i class="fa fa-comments text-primary"></i> 15</p>
+                        <p class="mr-3"><i class="fa fa-comments text-primary"></i>{{ $getRecord->getCommentCount() }}</p>
                     </div>
                 </div>
                 <div class="mb-5">
@@ -48,7 +51,7 @@
                                                     <i class="fa fa-folder text-primary"></i>{{ $related->category_slug }}
                                                 </a>
                                             </small>
-                                            <small class="mr-3"><i class="fa fa-comments text-primary"></i>0</small>
+                                            <small class="mr-3"><i class="fa fa-comments text-primary"></i>{{ $related->getCommentCount() }}</small>
                                         </div>
                                     </div>
                                 </div>
@@ -60,25 +63,25 @@
 
                 <!-- Comment List -->
                 <div class="mb-5">
-                    <h2 class="mb-4">3 Comments</h2>
-                    <div class="media mb-4">
-                        <img src="img/user.jpg" alt="Image" class="img-fluid rounded-circle mr-3 mt-1"
-                            style="width: 45px" />
-                        <div class="media-body">
-                            <h6>
-                                John Doe <small><i>01 Jan 2045 at 12:00pm</i></small>
-                            </h6>
-                            <p>
-                                Diam amet duo labore stet elitr ea clita ipsum, tempor labore
-                                accusam ipsum et no at. Kasd diam tempor rebum magna dolores
-                                sed sed eirmod ipsum. Gubergren clita aliquyam consetetur
-                                sadipscing, at tempor amet ipsum diam tempor consetetur at
-                                sit.
-                            </p>
-                            <button class="btn btn-sm btn-light">Reply</button>
+                    <h2 class="mb-4">({{$getRecord->getComment->count()}}) Comments</h2>
+
+                    @foreach ($getRecord->getComment as $comment)
+                        <div class="media mb-4">
+                            <img src="img/user.jpg" alt="Image" class="img-fluid rounded-circle mr-3 mt-1"
+                                style="width: 45px" />
+                            <div class="media-body">
+                                <h6>
+                                    {{$comment->user->name}} <small><i>{{date('d M Y', strtotime($comment->created_at))}} at {{date('h:i:A', strtotime($comment->created_at))}}</i></small>
+                                </h6>
+                                <p> 
+                                    {{ $comment->comment }}
+                                </p>
+                                <button class="btn btn-sm btn-light">Reply</button>
+                            </div>
                         </div>
-                    </div>
-                    <div class="media mb-4">
+                    @endforeach
+
+                    {{-- <div class="media mb-4">
                         <img src="img/user.jpg" alt="Image" class="img-fluid rounded-circle mr-3 mt-1"
                             style="width: 45px" />
                         <div class="media-body">
@@ -111,29 +114,18 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
 
                 <!-- Comment Form -->
                 <div class="bg-light p-5">
                     <h2 class="mb-4">Leave a comment</h2>
-                    <form>
+                    <form method="POST" action="{{ route('blog_comment_submit') }}">
+                        @csrf
+                        <input type="hidden" name="blog_id" value="{{ $getRecord->id }}">
                         <div class="form-group">
-                            <label for="name">Name *</label>
-                            <input type="text" class="form-control" id="name" />
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email *</label>
-                            <input type="email" class="form-control" id="email" />
-                        </div>
-                        <div class="form-group">
-                            <label for="website">Website</label>
-                            <input type="url" class="form-control" id="website" />
-                        </div>
-
-                        <div class="form-group">
-                            <label for="message">Message *</label>
-                            <textarea id="message" cols="30" rows="5" class="form-control"></textarea>
+                            <label for="message">Comment</label>
+                            <textarea id="comment" name="comment" required cols="30" rows="5" class="form-control"></textarea>
                         </div>
                         <div class="form-group mb-0">
                             <input type="submit" value="Leave Comment" class="btn btn-primary px-3" />
@@ -204,7 +196,7 @@
                                             <i class="fa fa-folder text-primary"></i>{{ $recent->category_name }}
                                         </a>
                                     </small>
-                                    <small class="mr-3"><i class="fa fa-comments text-primary"></i>0</small>
+                                    <small class="mr-3"><i class="fa fa-comments text-primary"></i>{{ $recent->getCommentCount() }}</small>
                                 </div>
                             </div>
                         </div>

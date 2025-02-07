@@ -70,4 +70,6 @@ Route::group(['middleware' => AuthMiddleware::class], function () {
     Route::get('panel/blog/edit/{id}', [BlogController::class, 'blog_edit'])->name('backend.blog.edit');
     Route::put('panel/blog/edit/{id}', [BlogController::class, 'blog_update'])->name('backend.blog.update');
     Route::delete('panel/blog/delete/{id}', [BlogController::class, 'blog_delete'])->name('backend.blog.delete');
+
+    Route::post('blog-comment-submit', [HomeController::class, 'BlogCommentSubmit'])->name('blog_comment_submit');
 });

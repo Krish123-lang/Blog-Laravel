@@ -162,4 +162,13 @@ class Blog extends Model
     {
         return $this->hasMany(BlogTags::class, 'blog_id');
     }
+
+    public function getComment()
+    {
+        return $this->hasMany(BlogComment::class, 'blog_id')->orderBy('blog_comment.id', 'desc');
+    }
+    public function getCommentCount()
+    {
+        return $this->hasMany(BlogComment::class, 'blog_id')->count();
+    }
 }
