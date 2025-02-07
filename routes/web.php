@@ -62,6 +62,9 @@ Route::group(['middleware' => AdminMiddleware::class], function () {
 Route::group(['middleware' => AuthMiddleware::class], function () {
     // Dashboard
     Route::get('panel/dashboard', [DashboardController::class, 'dashboard'])->name('backend.dashboard');
+    
+    Route::get('panel/change-password', [UserController::class, 'changePassword'])->name('backend.pages.change_password');
+    Route::post('panel/change-password', [UserController::class, 'updatePassword'])->name('backend.pages.update_password');
 
     // Blog
     Route::get('panel/blog/list', [BlogController::class, 'blog_list'])->name('backend.blog.list');

@@ -39,23 +39,14 @@
             <span>Page</span>
           </a>
         </li>
-      @endif
-
-      <li class="nav-item">
-        {{-- {{ route('backend.help.list') }} --}}
-        <a class="nav-link @if(Request::segment(2) != 'help') collapsed @endif" href="">
-          <i class="bi bi-envelope"></i>
-          <span>Help</span>
-        </a>
-      </li>
-
-      <li class="nav-item">
-        {{-- {{ route('backend.inbox.list') }} --}}
-        <a class="nav-link @if(Request::segment(2) != 'inbox') collapsed @endif" href="">
-          <i class="bi bi-card-list"></i>
-          <span>Inbox</span>
-        </a>
-      </li>
+        @endif
+        
+        <li class="nav-item">
+          <a class="nav-link @if(Request::segment(2) != 'change-password') collapsed @endif" href="{{ route('backend.pages.change_password') }}">
+            <i class="bi bi-key"></i>
+            <span>Change Password</span>
+          </a>
+        </li>
     </ul>
 
   </aside>
