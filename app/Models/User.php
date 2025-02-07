@@ -59,4 +59,13 @@ class User extends Authenticatable
             ->orderBy('users.id', 'asc')
             ->paginate(20);
     }
+
+    public function getProfile(){
+        if(!empty($this->profile_picture) && file_exists('uploads/profile/'.$this->profile_picture)){
+            return url('uploads/profile/'.$this->profile_picture);
+        }
+        else{
+            return url('assets/auth/img/profile-img.jpg');
+        }
+    }
 }

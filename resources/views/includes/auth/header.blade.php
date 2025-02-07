@@ -163,13 +163,13 @@
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="{{ asset('assets/auth/img/profile-img.jpg') }}" alt="Profile" class="rounded-circle">
+            <img src="{{ Auth::user()->getProfile() }}" alt="Profile" class="rounded-circle" style="width: 36px; height: 36px; object-fit: cover;">
             <span class="d-none d-md-block dropdown-toggle ps-2">{{Auth::user()->name}}</span>
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+              <a class="dropdown-item d-flex align-items-center" href="{{ route('backend.pages.account_setting') }}">
                 <i class="bi bi-gear"></i>
                 <span>Account Settings</span>
               </a>

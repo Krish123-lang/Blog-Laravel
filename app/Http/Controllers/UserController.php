@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -89,5 +90,31 @@ class UserController extends Controller
         else{
             return redirect()->back()->with('error', 'Old password do not match!');
         }
+    }
+
+    public function AccountSetting(){
+        $data['getUser']=User::getSingle(Auth::user()->id);
+        return view('backend.profile.account_setting', $data);
+    }
+
+    public function UpdateAccountSetting(Request $request){
+        $getUser = User::getSingle(Auth::user()->id);
+        $getUser->name = $request->name;
+
+        if (!empty($request->file('profile_picture'))) {
+
+            if(!empty($this->profile_picture) && file_exists('uploads/profile/'.$getUser->profile_picture)){
+                unlink('uploads/profile/'.$getUser->profile_picture);
+            }
+
+            $ext = $request->file('profile_picture')->getClientOriginalExtension();
+            $file = $request->file('profile_picture');
+            $filename = Str::random(20) . '.' . $ext;
+            $file->move('uploads/profile/', $filename);
+            $getUser->profile_picture = $filename;
+        }
+
+        $getUser->save();
+        return redirect()->back()->with('success', 'Account setting successfully updated!');
     }
 }
