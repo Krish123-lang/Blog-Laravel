@@ -76,45 +76,42 @@
                                 <p> 
                                     {{ $comment->comment }}
                                 </p>
-                                <button class="btn btn-sm btn-light">Reply</button>
+                                <button class="btn btn-sm btn-light ReplyOpen" id="{{$comment->id}}">Reply</button>
+
+                                @foreach ($comment->getReply as $reply)
+                                    <div class="media mt-4">
+                                        <img src="img/user.jpg" alt="Image" class="img-fluid rounded-circle mr-3 mt-1"
+                                            style="width: 45px" />
+                                        <div class="media-body">
+                                            <h6>
+                                                {{$reply->user->name}} <small><i>{{date('d M Y', strtotime($reply->created_at))}} at {{date('h:i:A', strtotime($reply->created_at))}}</i></small>
+                                            </h6>
+                                            <p>
+                                                {{$reply->comment}}
+                                            </p>
+                                        </div>
+                                    </div>  
+                                @endforeach
+
+                                <div class="bg-light p-3 ShowReply{{$comment->id}}" style="display: none;">
+                                    <h2 class="mb-4">Reply a comment</h2>
+                                    <form method="POST" action="{{ route('blog_comment_reply_submit') }}">
+                                        @csrf
+                                        <input type="hidden" name="comment_id" value="{{ $comment->id }}">
+                                        <div class="form-group">
+                                            <label for="message">Comment</label>
+                                            <textarea id="comment" name="comment" required cols="30" rows="5" class="form-control"></textarea>
+                                        </div>
+                                        <div class="form-group mb-0">
+                                            <input type="submit" value="Reply" class="btn btn-primary px-3" />
+                                        </div>
+                                    </form>
+                                </div>
+
                             </div>
                         </div>
                     @endforeach
 
-                    {{-- <div class="media mb-4">
-                        <img src="img/user.jpg" alt="Image" class="img-fluid rounded-circle mr-3 mt-1"
-                            style="width: 45px" />
-                        <div class="media-body">
-                            <h6>
-                                John Doe <small><i>01 Jan 2045 at 12:00pm</i></small>
-                            </h6>
-                            <p>
-                                Diam amet duo labore stet elitr ea clita ipsum, tempor labore
-                                accusam ipsum et no at. Kasd diam tempor rebum magna dolores
-                                sed sed eirmod ipsum. Gubergren clita aliquyam consetetur
-                                sadipscing, at tempor amet ipsum diam tempor consetetur at
-                                sit.
-                            </p>
-                            <button class="btn btn-sm btn-light">Reply</button>
-                            <div class="media mt-4">
-                                <img src="img/user.jpg" alt="Image" class="img-fluid rounded-circle mr-3 mt-1"
-                                    style="width: 45px" />
-                                <div class="media-body">
-                                    <h6>
-                                        John Doe <small><i>01 Jan 2045 at 12:00pm</i></small>
-                                    </h6>
-                                    <p>
-                                        Diam amet duo labore stet elitr ea clita ipsum, tempor
-                                        labore accusam ipsum et no at. Kasd diam tempor rebum
-                                        magna dolores sed sed eirmod ipsum. Gubergren clita
-                                        aliquyam consetetur, at tempor amet ipsum diam tempor at
-                                        sit.
-                                    </p>
-                                    <button class="btn btn-sm btn-light">Reply</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div> --}}
                 </div>
 
                 <!-- Comment Form -->
@@ -219,3 +216,12 @@
     </div>
     <!-- Detail End -->
 @endsection
+
+@push('script')
+    <script>
+        $('.ReplyOpen').click(function(){
+            var id=$(this).attr('id');
+            $('.ShowReply'+id).toggle();
+        });
+    </script>
+@endpush

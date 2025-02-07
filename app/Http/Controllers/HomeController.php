@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Blog;
 use App\Models\BlogComment;
+use App\Models\BlogCommentReply;
 use App\Models\Category;
 use App\Models\Page;
 use Illuminate\Http\Request;
@@ -106,5 +107,16 @@ class HomeController extends Controller
         $save->save();
 
         return redirect()->back()->with('success', 'Your comment has been posted!');
+    }
+
+    public function BlogCommentReplySubmit(Request $request)
+    {
+        $save = new BlogCommentReply;
+        $save->user_id = Auth::user()->id;
+        $save->comment_id = $request->comment_id;
+        $save->comment = $request->comment;
+        $save->save();
+
+        return redirect()->back()->with('success', 'Your reply was posted!');
     }
 }

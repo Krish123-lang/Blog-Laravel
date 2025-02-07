@@ -72,4 +72,5 @@ Route::group(['middleware' => AuthMiddleware::class], function () {
     Route::delete('panel/blog/delete/{id}', [BlogController::class, 'blog_delete'])->name('backend.blog.delete');
 
     Route::post('blog-comment-submit', [HomeController::class, 'BlogCommentSubmit'])->name('blog_comment_submit');
+    Route::post('blog-comment-reply-submit', [HomeController::class, 'BlogCommentReplySubmit'])->name('blog_comment_reply_submit');
 });
